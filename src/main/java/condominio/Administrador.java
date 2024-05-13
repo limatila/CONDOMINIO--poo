@@ -2,7 +2,7 @@ package condominio;
 
 public class Administrador extends Usuario {
 
-    public Morador criaMorador(String nome /*! etc, criar 1 método pra cada subclasse*/ ){
+    public Morador criaMorador(String nome /*! etc, criar 1 método pra cada subclasse*/, Registro registroSelecionado ){
         return null;
     }
 

@@ -37,10 +37,12 @@ public abstract class Usuario implements Autenticavel {
         }
     }
 
+
+    //Getters
     public boolean isAutenticado() {
         return this.autenticado;
     }
-    //Getters
+
     public String getNome() {
         return this.nome;
     }

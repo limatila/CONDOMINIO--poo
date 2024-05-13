@@ -1,7 +1,6 @@
 package condominio;
 
-import condominio.registros.Comunicados;
-import condominio.registros.Registro;
+import condominio.registros.Comunicado;
 
 public class Funcionario extends Usuario{
 
@@ -13,12 +12,8 @@ public class Funcionario extends Usuario{
     }
 
     //Métodos
-    public void registraOcorrencia(Registro registroInserido){
-        registroInserido.registrar(tal coisa, tal descricao);
-    }
-
-    public void registrarOcorrencia(Comunicados comunicadoInserido){
-
+    public void registraOcorrencia(String conteudo, Comunicado registroInserido){
+        registroInserido.registrar(conteudo, this);
     }
 
     public int obterContatoMorador(Morador moradorInserido){
