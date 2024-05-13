@@ -2,16 +2,6 @@ package condominio;
 
 public class Administrador extends Usuario {
 
-    @Override
-    public void Autenticar() {
-
-    }
-
-    @Override
-    public void Deslogar() {
-
-    }
-
     public Morador criaMorador(String nome /*! etc, criar 1 método pra cada subclasse*/ ){
         return null;
     }
@@ -22,8 +12,4 @@ public class Administrador extends Usuario {
     public void apagaUsuario();
 
     //Getters
-    @Override
-    public boolean isAutenticado() {
-        return this.autenticado;
-    }
 }
