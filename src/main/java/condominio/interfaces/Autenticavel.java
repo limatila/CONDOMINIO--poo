@@ -2,7 +2,7 @@ package condominio.interfaces;
 
 public interface Autenticavel {
 
-    public void Autenticar();
+    public void Autenticar(String senhaInserida);
 
     public void Deslogar();
 
