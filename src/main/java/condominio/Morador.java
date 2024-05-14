@@ -31,9 +31,11 @@ public class Morador extends Usuario implements Autenticavel {
             registroInserido.registrar(this, conteudo);
         } else { throw new usuarioNaoLogadoException(); }
     }
-    public void consultarValorDebito(ArmazenamentoDebitos DebitosInseridos, String mesReferencia){
+    public double consultarValorDebito(ArmazenamentoDebitos DebitosInseridos, String mesReferencia){
         if (this.autenticado) {
-        DebitosInseridos.getValorComTaxa(this, mesReferencia);
+            double valorEncontrado = DebitosInseridos.getValorComTaxa(this, mesReferencia);
+            System.out.println("O valor encontrado foi de: " + valorEncontrado);
+            return valorEncontrado;
         } else { throw new usuarioNaoLogadoException(); }
     }
     public void verComunicado(Comunicado registroInserido, int posicaoSelecionada, boolean verOcorrencia){

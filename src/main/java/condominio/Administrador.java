@@ -37,9 +37,11 @@ public class Administrador extends Usuario implements Autenticavel {
         } else { throw new usuarioNaoLogadoException(); }
     }
 
-    public void consultarValorDebitoCliente(ArmazenamentoDebitos DebitosInseridos, Morador moradorInserido, String mesReferencia){
+    public double consultarValorDebitoCliente(ArmazenamentoDebitos DebitosInseridos, Morador moradorInserido, String mesReferencia){
         if (this.autenticado) {
-            DebitosInseridos.getValorComTaxa(moradorInserido, mesReferencia);
+            double valorEncontrado = DebitosInseridos.getValorComTaxa(moradorInserido, mesReferencia);
+            System.out.println("O valor encontrado foi de: " + valorEncontrado);
+            return valorEncontrado;
         } else { throw new usuarioNaoLogadoException(); }
     }
 
