@@ -63,7 +63,7 @@ public class ArmazenamentoDebitos {
     }
 
     //Getters de valores para pagamento
-    public double getValorDebito(Morador moradorInserido, String mesReferencia){
+    private double getValorDebito(Morador moradorInserido, String mesReferencia){
         Debito debitoAchado = this.armazenamento.get( moradorInserido.getNumeroAp() );
         return debitoAchado.getRegistro(mesReferencia);
     }

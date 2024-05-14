@@ -11,13 +11,13 @@ public class ReclameAqui extends Registro {
     protected List< String[] > armazenamento = new ArrayList<>(); //NOME e CONTEUDO por entrada!
 
     //Métodos
-    public void registrar(String conteudo, Usuario pessoaResponsavel) {
+    public void registrar(Usuario pessoaResponsavel, String conteudo) {
         this.armazenamento.add( new String[]{ conteudo, pessoaResponsavel.getNome() } );
     }
 
     public void remover(int posicao){
         this.armazenamento.remove(posicao);
-    };
+    }
 
     //Getters
     public String[] getRegistro(int posicaoInserida) {
