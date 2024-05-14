@@ -2,10 +2,11 @@ package condominio;
 
 import condominio.excecoes.tipoUsuarioInvalidoException;
 import condominio.excecoes.usuarioNaoLogadoException;
+import condominio.interfaces.Autenticavel;
 import condominio.registros.ArmazenamentoDebitos;
 import condominio.registros.Comunicado;
 
-public class Administrador extends Usuario {
+public class Administrador extends Usuario implements Autenticavel {
 
     public Administrador(String nome, String endereco, String senha, int telefoneContato) {
         super(nome, endereco, senha, telefoneContato);

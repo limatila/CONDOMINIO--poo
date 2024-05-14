@@ -3,11 +3,12 @@ package condominio;
 import condominio.excecoes.metodoInvalidoException;
 import condominio.excecoes.usuarioInvalidoException;
 import condominio.excecoes.usuarioNaoLogadoException;
+import condominio.interfaces.Autenticavel;
 import condominio.registros.ArmazenamentoDebitos;
 import condominio.registros.Comunicado;
 import condominio.registros.ReclameAqui;
 
-public class Morador extends Usuario {
+public class Morador extends Usuario implements Autenticavel {
 
     protected String placaCarro;
     protected int numeroAp;
