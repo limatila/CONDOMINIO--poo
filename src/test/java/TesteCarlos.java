@@ -52,8 +52,8 @@ public class TesteCarlos {
 
         //Asserts finais de confirmação
         Assert.assertEquals( 2054.9F , (float) valorPagamento, 0.1);
-        Assert.assertEquals( 305.30F, (float) armazem.getTaxaLiquidaAtual(), 0.1 );
-        Assert.assertEquals( 0.09F, (float) armazem.getTaxaCondominial(), 0.1);
+        Assert.assertEquals( 305.30F, (float) taxaLiquida, 0.1 );
+        Assert.assertEquals( 0.09F, (float) taxaCondominial, 0.1);
         Assert.assertEquals( 32238142, numeroDeMoradorEncontrado );
         Assert.assertEquals( "A entrada do prédio está molhada, tenham cuidado.", comunicados.getOcorrencia(0) );
         Assert.assertEquals( "Favor apresentar informações de visitantes na portaria.", comunicados.getComunicado(0) );

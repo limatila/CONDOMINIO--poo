@@ -2,10 +2,9 @@ package condominio;
 
 import condominio.excecoes.usuarioInvalidoException;
 import condominio.excecoes.usuarioNaoLogadoException;
-import condominio.interfaces.Autenticavel;
 import condominio.registros.Comunicado;
 
-public class Funcionario extends Usuario implements Autenticavel {
+public class Funcionario extends Usuario {
 
     String cargo;
 

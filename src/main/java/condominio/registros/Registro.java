@@ -1,6 +1,5 @@
 package condominio.registros;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Registro {
