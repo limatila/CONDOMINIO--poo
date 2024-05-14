@@ -2,6 +2,9 @@ package condominio;
 
 import condominio.excecoes.metodoInvalidoException;
 import condominio.excecoes.usuarioInvalidoException;
+import condominio.excecoes.usuarioNaoLogadoException;
+import condominio.registros.ArmazenamentoDebitos;
+import condominio.registros.Comunicado;
 import condominio.registros.ReclameAqui;
 
 public class Morador extends Usuario {
@@ -10,31 +13,41 @@ public class Morador extends Usuario {
     protected int numeroAp;
 
     //Construtores
-    public Morador(String nome, int telefoneContato, int numeroAp, String senha, String placaCarro){
+    Morador(String nome, int telefoneContato, int numeroAp, String senha, String placaCarro){
         super(nome, "Condomínio Bela Vista", senha, telefoneContato);
         this.numeroAp = numeroAp;
         this.placaCarro = placaCarro;
     }
 
-    public Morador(String nome, int telefoneContato, String senha, int numeroAp){
+    Morador(String nome, int telefoneContato, String senha, int numeroAp){
         super(nome, "Condomínio Bela Vista", senha,  telefoneContato);
         this.numeroAp = numeroAp;
     }
 
     //Métodos
-    public void registrarReclamacao(ReclameAqui registroInserido){
-
+    public void registrarReclamacao(ReclameAqui registroInserido, String conteudo){
+        if (this.autenticado) {
+            registroInserido.registrar(this, conteudo);
+        } else { throw new usuarioNaoLogadoException(); }
     }
-    public void consultarValorPagamento(){
-
+    public void consultarValorDebito(ArmazenamentoDebitos DebitosInseridos, String mesReferencia){
+        if (this.autenticado) {
+        DebitosInseridos.getValorComTaxa(this, mesReferencia);
+        } else { throw new usuarioNaoLogadoException(); }
     }
-    public void verComunicados(){
-
+    public void verComunicado(Comunicado registroInserido, int posicaoSelecionada, boolean verOcorrencia){
+        if(this.autenticado) {
+            if(!verOcorrencia){
+                registroInserido.getComunicado(posicaoSelecionada);
+            } else { //true para selecionar ocorrencias de funcionarios
+                registroInserido.getOcorrencia(posicaoSelecionada);
+            }
+        } else { throw new usuarioNaoLogadoException(); }
     }
 
 
     //Getters
-    public String getPlacaCarro() {
+    public String getPlacaCarro() { //* Pode ser implementado para aplicar uma taxa sobre isso, por exemplo
         return this.placaCarro;
     }
 
@@ -42,17 +55,31 @@ public class Morador extends Usuario {
         return this.numeroAp;
     }
 
-    @Override
-    public int getContato(){
-        throw new metodoInvalidoException();
-    }
-
-    public int getContato(Usuario usuarioRequisitante) { //!Versão sem usuário não pode ser usada.
+    public int getContato(Usuario usuarioRequisitante) { //!Versão sem parametro de usuário não deve ser usada.
         //Rodará apenas se um usuário válido for o requisitante
         if (usuarioRequisitante instanceof Funcionario || usuarioRequisitante instanceof Administrador){
             return this.telefoneContato;
         } else {
             throw new usuarioInvalidoException( usuarioRequisitante.getNome() );
         }
+    }
+
+    //Setters
+    public void setPlacaCarro(String placaCarro, Usuario usuarioRequisitante) {
+        if(usuarioRequisitante instanceof Administrador) {
+            this.placaCarro = placaCarro;
+        } else { throw new usuarioInvalidoException(usuarioRequisitante.getNome()); }
+    }
+
+    public void setNumeroAp(int numeroAp, Usuario usuarioRequisitante) {
+        if(usuarioRequisitante instanceof Administrador) {
+            this.numeroAp = numeroAp;
+        } else { throw new usuarioInvalidoException(usuarioRequisitante.getNome()); }
+    }
+
+    //Métodos substituidos
+    @Override
+    public int getContato(){
+        throw new metodoInvalidoException();
     }
 }

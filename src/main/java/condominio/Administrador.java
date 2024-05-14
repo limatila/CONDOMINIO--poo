@@ -1,15 +1,46 @@
 package condominio;
 
+import condominio.excecoes.tipoUsuarioInvalidoException;
+import condominio.excecoes.usuarioNaoLogadoException;
+import condominio.registros.ArmazenamentoDebitos;
+import condominio.registros.Comunicado;
+
 public class Administrador extends Usuario {
 
-    public Morador criaMorador(String nome /*! etc, criar 1 método pra cada subclasse*/, Registro registroSelecionado ){
-        return null;
+    public Administrador(String nome, String endereco, String senha, int telefoneContato) {
+        super(nome, endereco, senha, telefoneContato);
     }
 
-    /* Como admin, ele pode modificar todo o sistema.
-    *  logo cada classe deve verificar se quem chama é Administrador, e executar se sim.
-    *  pode ser usado Objeto.class ou instance of pra isso (pesquisar como) */
-    public void apagaUsuario();
+    //Métodos
+    public Usuario criaUsuario(String tipoUsuario, String nome, String endereco, String senha, int telefoneContato){//Deve ser armazenado em uma variável
+        if (this.autenticado) {
+            switch (tipoUsuario) {// Strings possíveis: Admin, Morador, Funcionario
+                case "Admin":
+                    return new Administrador(nome, endereco, senha, telefoneContato);
+                case "Morador":
+                    return new Morador(nome, telefoneContato, senha, 0);//Setar o numero de Ap depois!
+                case "Funcionario":
+                    return new Funcionario(nome, endereco, senha, telefoneContato, null);//Setar o cargo depois!
+                default:
+                    throw new tipoUsuarioInvalidoException(tipoUsuario);
+            }
+        } else {
+            throw new usuarioNaoLogadoException();
+        }
+    }
+
+    public void registrarOcorrencia(String conteudo, Comunicado registroInserido){//* Criar Comunicado para inserir aqui!
+        if (this.autenticado) {
+            registroInserido.registrar(conteudo, this);
+            //Registrará apenas no armazenamento específico de comunicados.
+        } else { throw new usuarioNaoLogadoException(); }
+    }
+
+    public void consultarValorDebitoCliente(ArmazenamentoDebitos DebitosInseridos, Morador moradorInserido, String mesReferencia){
+        if (this.autenticado) {
+            DebitosInseridos.getValorComTaxa(moradorInserido, mesReferencia);
+        } else { throw new usuarioNaoLogadoException(); }
+    }
 
     //Getters
 }
