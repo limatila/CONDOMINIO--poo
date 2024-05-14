@@ -15,7 +15,7 @@ public abstract class Usuario implements Autenticavel {
 
     public Usuario(String nome, String endereco, String senha, int telefoneContato){
         this.nome = nome;
-        this.endereco = endereco;
+        this.endereco = (String) endereco;
         this.telefoneContato = telefoneContato;
     }
 
