@@ -19,7 +19,7 @@ public class Administrador extends Usuario implements Autenticavel {
                 case "Admin":
                     return new Administrador(nome, endereco, senha, telefoneContato);
                 case "Morador":
-                    return new Morador(nome, telefoneContato, senha, 0);//Setar o numero de Ap depois!
+                    return new Morador(nome, telefoneContato, 0, senha);//Setar o numero de Ap depois!
                 case "Funcionario":
                     return new Funcionario(nome, endereco, senha, telefoneContato, null);//Setar o cargo depois!
                 default:

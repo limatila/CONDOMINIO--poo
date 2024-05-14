@@ -20,13 +20,13 @@ public class Morador extends Usuario implements Autenticavel {
         this.placaCarro = placaCarro;
     }
 
-    Morador(String nome, int telefoneContato, String senha, int numeroAp){
+    Morador(String nome, int telefoneContato, int numeroAp, String senha){
         super(nome, "Condomínio Bela Vista", senha,  telefoneContato);
         this.numeroAp = numeroAp;
     }
 
     //Métodos
-    public void registrarReclamacao(ReclameAqui registroInserido, String conteudo){
+    public void registrarReclamacao(String conteudo, ReclameAqui registroInserido){
         if (this.autenticado) {
             registroInserido.registrar(this, conteudo);
         } else { throw new usuarioNaoLogadoException(); }

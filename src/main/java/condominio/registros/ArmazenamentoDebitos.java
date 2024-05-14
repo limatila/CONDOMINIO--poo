@@ -4,6 +4,7 @@ import condominio.Administrador;
 import condominio.Morador;
 import condominio.Usuario;
 import condominio.excecoes.adminNaoVerificadoException;
+import condominio.excecoes.usuarioInvalidoException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -84,10 +85,14 @@ public class ArmazenamentoDebitos {
     }
 
     //Setters
-    public void setTaxasLiquidas(double taxaInserida) {
-        this.taxasLiquidasSomadas = taxaInserida;
+    public void setTaxasLiquidas(double taxaInserida, Usuario usuarioRequisitante) {
+        if(usuarioRequisitante instanceof Administrador) {
+            this.taxasLiquidasSomadas = taxaInserida;
+        } else { throw new usuarioInvalidoException(usuarioRequisitante.getNome()); }
     }
-    public void setTaxaCondominial(int taxaInserida) {
-        this.taxaCondominialPorcentagem = taxaInserida;
+    public void setTaxaCondominial(int taxaInserida, Usuario usuarioRequisitante) {
+        if(usuarioRequisitante instanceof Administrador) {
+            this.taxaCondominialPorcentagem = taxaInserida;
+        } else { throw new usuarioInvalidoException(usuarioRequisitante.getNome()); }
     }
 }

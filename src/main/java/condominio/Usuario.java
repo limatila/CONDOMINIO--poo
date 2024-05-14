@@ -17,12 +17,13 @@ public abstract class Usuario implements Autenticavel {
         this.nome = nome;
         this.endereco = (String) endereco;
         this.telefoneContato = telefoneContato;
+        this.senha = senha;
     }
 
     public void Autenticar(String senhaInserida) { // deve receber senha(?) e modificar o status
         if(Objects.equals(senhaInserida, this.senha)){
             this.autenticado = true;
-            System.out.println(this.nome + "Foi Logado");
+            System.out.println(this.nome + " Foi Logado");
         } else {
             throw new senhaErradaException();
         }
